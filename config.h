@@ -1,3 +1,4 @@
+#include "colortheme.h"
 /* See LICENSE file for copyright and license details. */
 
 /*
@@ -5,8 +6,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
+static char *font = "Mononoki Nerd Font:pixelsize=14:antialias=true:autohint=true";
+static char *font2[] = {"Mononoki Nerd Font:pixelsize=14:antialias=true:autohint=true"};
 static int borderpx = 2;
 
 /*
@@ -93,41 +94,113 @@ unsigned int tabspaces = 8;
 /* bg opacity */
 float alpha = 0.95;
 
-/* Terminal colors (16 first used in escape sequence) */
+// /* Terminal colors (16 first used in escape sequence) */
+// static const char *colorname[] = {
+// 	"black", /* hard contrast: #1d2021 / soft contrast: #32302f */
+// 	"red",
+// 	"green",
+// 	"#FF4000",
+// 	"#5555F6",
+// 	"#B40486",
+// 	"#00BFFF",
+// 	"#A4A4A4",
+// 	"#424242",
+// 	"#de352e",
+// 	"#82FA58",
+// 	"#F3F781" ,
+// 	"#8181F7",
+// 	"#F5A9F2",
+// 	"#01DFD7",
+// 	"#D8D8D8",
+// 	[255] = 0,
+// 	/* more colors can be added after 255 to use with DefaultXX */
+// 	"#add8e6", /* 256 -> cursor */
+// 	"#555555", /* 257 -> rev cursor*/
+// 	"#282828", /* 258 -> bg */
+// 	"#ebdbb2", /* 259 -> fg */
+// };
+// 
+
 static const char *colorname[] = {
-	"black", /* hard contrast: #1d2021 / soft contrast: #32302f */
-	"red",
-	"green",
-	"#FF4000",
-	"#5555F6",
-	"#B40486",
-	"#00BFFF",
-	"#A4A4A4",
-	"#424242",
-	"#de352e",
-	"#82FA58",
-	"#F3F781" ,
-	"#8181F7",
-	"#F5A9F2",
-	"#01DFD7",
-	"#D8D8D8",
-	[255] = 0,
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#282828", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
+
+  /* 8 normal colors */
+  [0] =color0, /* black   */
+  [1] =color1, /* red     */
+  [2] =color2, /* green   */
+  [3] =color3, /* yellow  */
+  [4] =color4, /* blue    */
+  [5] =color5, /* magenta */
+  [6] =color6, /* cyan    */
+  [7] =color7, /* white   */
+
+  /* 8 bright colors */
+  [8]  = color8, /* black   */
+  [9]  = color9, /* red     */
+  [10] = color10, /* green   */
+  [11] = color11, /* yellow  */
+  [12] = color12, /* blue    */
+  [13] = color13, /* magenta */
+  [14] = color14, /* cyan    */
+  [15] = color15, /* white   */
+
+  /* special colors */
+  [256] = colorbg, /* background */
+  [257] = colorfg, /* foreground */
 };
-
-
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 259;
-unsigned int defaultbg = 258;
-static unsigned int defaultcs = 256;
+// unsigned int defaultfg = 259;
+// unsigned int defaultbg = 258;
+// static unsigned int defaultcs = 256;
+// static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 257;
 static unsigned int defaultrcs = 257;
+
+//static const char *colorname[] = {
+//
+//  /* 8 normal colors */
+//  [0] = "#000000", /* black   */
+//  [1] = "#ff5555", /* red     */
+//  [2] = "#50fa7b", /* green   */
+//  [3] = "#f1fa8c", /* yellow  */
+//  [4] = "#bd93f9", /* blue    */
+//  [5] = "#ff79c6", /* magenta */
+//  [6] = "#8be9fd", /* cyan    */
+//  [7] = "#bbbbbb", /* white   */
+//
+//  /* 8 bright colors */
+//  [8]  = "#44475a", /* black   */
+//  [9]  = "#ff5555", /* red     */
+//  [10] = "#50fa7b", /* green   */
+//  [11] = "#f1fa8c", /* yellow  */
+//  [12] = "#bd93f9", /* blue    */
+//  [13] = "#ff79c6", /* magenta */
+//  [14] = "#8be9fd", /* cyan    */
+//  [15] = "#ffffff", /* white   */
+//
+//  /* special colors */
+//  [256] = "#000000", /* background */
+//  [257] = "#f8f8f2", /* foreground */
+//};
+///*
+// * Default colors (colorname index)
+// * foreground, background, cursor, reverse cursor
+// */
+//// unsigned int defaultfg = 259;
+//// unsigned int defaultbg = 258;
+//// static unsigned int defaultcs = 256;
+//// static unsigned int defaultrcs = 257;
+//unsigned int defaultfg = 257;
+//unsigned int defaultbg = 256;
+//static unsigned int defaultcs = 257;
+//static unsigned int defaultrcs = 257;
+
+unsigned int defaultitalic = 7;
+unsigned int defaultunderline = 7;
 
 /*
  * Default shape of cursor
